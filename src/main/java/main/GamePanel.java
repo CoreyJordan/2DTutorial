@@ -1,5 +1,6 @@
 package main;
 
+import Objects.Player;
 import utils.GameClock;
 import utils.KeyHandler;
 
@@ -12,10 +13,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     Thread gameThread;
     KeyHandler keyH = new KeyHandler();
-
-    private int playerX = 100;
-    private int playerY = 100;
-    private int playerSpeed = 4;
+    Point playerStart = new Point(100,100);
+    Player player;
 
 
     public GamePanel() {
@@ -27,9 +26,11 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     /**
-     * Creates a new instance of the Thread and starts it, which in turn executes run().
+     * Creates a new instance of the Player and Thread, then starts the thread, which in turn executes run().
      */
     public void startGameThread() {
+        player = new Player(this, keyH, playerStart);
+
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -62,15 +63,7 @@ public class GamePanel extends JPanel implements Runnable{
      * Updates the game model each loop.
      */
     public void update() {
-        if (keyH.upPressed) {
-            playerY -= playerSpeed;
-        } else if (keyH.downPressed) {
-            playerY += playerSpeed;
-        } else if (keyH.leftPressed) {
-            playerX -= playerSpeed;
-        } else if (keyH.rightPressed) {
-            playerX += playerSpeed;
-        }
+        player.update();
     }
 
     /**
@@ -80,8 +73,9 @@ public class GamePanel extends JPanel implements Runnable{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
-        g2D.setColor(Color.WHITE);
-        g2D.fillRect(playerX, playerY, TILE_SIZE, TILE_SIZE);
+
+        player.draw(g2D);
+
         g2D.dispose();
 
     }
