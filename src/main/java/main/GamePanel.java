@@ -1,5 +1,6 @@
 package main;
 
+import utils.GameClock;
 import utils.KeyHandler;
 
 import javax.swing.*;
@@ -39,11 +40,19 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run() {
 
+        GameClock gameClock = new GameClock();
         while (gameThread != null) {
+            gameClock.tick(INTERVAL);
 
-            update();
+            if (gameClock.isAtFrame()) {
+                update();
 
-            repaint();
+                repaint();
+            }
+
+            if (gameClock.oneSecondPassed()) {
+                System.out.println(gameClock.getFps());
+            }
 
         }
 

@@ -13,5 +13,9 @@ public class Globals {
     public static final int SCREEN_WIDTH = TILE_SIZE * SCREEN_COLS;
     public static final int SCREEN_HEIGHT = TILE_SIZE * SCREEN_ROWS;
 
+    // GAME SPEED
+    public static final int FPS = 60;
+    public static final double INTERVAL = 1_000_000_000.0 / FPS;
+
 
 }
