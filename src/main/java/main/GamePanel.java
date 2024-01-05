@@ -3,6 +3,7 @@ package main;
 import Objects.Player;
 import utils.GameClock;
 import utils.KeyHandler;
+import world.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +12,9 @@ import static utils.Globals.*;
 
 public class GamePanel extends JPanel implements Runnable{
 
-    Thread gameThread;
+    TileManager tileManager = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
+    Thread gameThread;
     Point playerStart = new Point(100,100);
     Player player;
 
@@ -70,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
 
+        tileManager.draw(g2D);
         player.draw(g2D);
 
         g2D.dispose();
