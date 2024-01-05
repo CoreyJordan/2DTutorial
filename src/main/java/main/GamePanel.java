@@ -43,16 +43,12 @@ public class GamePanel extends JPanel implements Runnable{
 
         GameClock gameClock = new GameClock();
         while (gameThread != null) {
-            gameClock.tick(INTERVAL);
+            gameClock.tick();
 
             if (gameClock.isAtFrame()) {
                 update();
 
                 repaint();
-            }
-
-            if (gameClock.oneSecondPassed()) {
-                System.out.println(gameClock.getFps());
             }
 
         }

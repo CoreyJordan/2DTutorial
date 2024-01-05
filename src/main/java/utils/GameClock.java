@@ -1,6 +1,9 @@
 package utils;
 
 public class GameClock {
+    private final int fps = 60;
+    private final int oneSecond = 1_000_000_000; // nanoseconds
+    private final double interval = (double)oneSecond / fps;
     private double delta;
     private long startTime;
     private int frames;
@@ -17,9 +20,8 @@ public class GameClock {
     /**
      * Determines the amount of time passed in a loop and scales it to the game's FPS.
      *
-     * @param interval
      */
-    public void tick(double interval) {
+    public void tick() {
         long currentTime = System.nanoTime();
         delta += (currentTime - startTime) / interval;
         timer += currentTime - startTime;
@@ -46,7 +48,7 @@ public class GameClock {
      * @return true if greater than 1 billion nanoseconds
      */
     public boolean oneSecondPassed() {
-        if (timer < 1_000_000_000) {
+        if (timer < oneSecond) {
             return false;
         }
         return true;

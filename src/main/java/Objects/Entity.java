@@ -1,6 +1,7 @@
 package Objects;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Superclass for all actionable entities in the game.
@@ -8,6 +9,15 @@ import java.awt.*;
 public abstract class Entity {
     private Point location;
     private int speed;
+
+    // Entity animations
+    protected BufferedImage[] up;
+    protected BufferedImage[] down;
+    protected BufferedImage[] left;
+    protected BufferedImage[] right;
+
+    protected int spriteCounter = 0;
+    protected int spriteIndex = 0;
 
     public Entity(Point location, int speed) {
         this.location = location;
