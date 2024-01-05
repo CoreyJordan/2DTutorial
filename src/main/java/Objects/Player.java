@@ -36,7 +36,7 @@ public class Player extends Entity{
     }
 
     private void cycleSprite() {
-        if (!keyH.downPressed && !keyH.leftPressed && !keyH.upPressed && !keyH.rightPressed) {
+        if (!keyH.isAnyKeyDown()) {
             spriteIndex = 0;
             return;
         }
